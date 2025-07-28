@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Testimonials Carousel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fdfdfd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .testimonial-section {
+      text-align: center;
+      max-width: 900px;
+      padding: 40px 20px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .testimonial-section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-section h2::before,
+    .testimonial-section h2::after {
+      content: '~';
+      font-size: 1.5rem;
+      margin: 0 10px;
+      color: #666;
+    }
+
+    .testimonial-slide {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .testimonial-slide.active {
+      display: flex;
+    }
+
+    .testimonial-img {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      margin: 0 auto 30px;
+    }
+
+    .testimonial-text {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 20px;
+      padding: 0 20px;
+    }
+
+    .testimonial-author {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ccc;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #444;
+    }
+
+    .nav-buttons {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      transform: translateY(-50%);
+    }
+
+    .nav-button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    .nav-button:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .testimonial-text {
+        font-size: 0.95rem;
+      }
+      .testimonial-img {
+        width: 120px;
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="testimonial-section">
+    <h2>TESTIMONIALS</h2>
+
+    <!-- Slides -->
+    <div class="testimonial-slide active">
+      <img src="a8ea1b66-4734-45b6-b256-15345497211b.png" class="testimonial-img" alt="Harshal & Nikita"/>
+      <p class="testimonial-text">Capturer exceeded all our expectations! Their attention to detail and ability to capture the essence of our special day was truly remarkable.</p>
+      <p class="testimonial-author">Harshal & Nikita</p>
+    </div>
+
+    <div class="testimonial-slide">
+      <img src="assets/image-1.jpg" class="testimonial-img" alt="Omkar & Anushaka"/>
+      <p class="testimonial-text">We were blown away by the photos! Every moment was captured beautifully and naturally. Highly recommended!</p>
+      <p class="testimonial-author">Omkar & Anushaka</p>
+    </div>
+
+    <div class="testimonial-slide">
+      <img src="Testimonial/image-4.jpg" class="testimonial-img" alt="Swapnil & Priya"/>
+      <p class="testimonial-text">Absolutely stunning work! We’ll treasure these pictures for the rest of our lives. Thank you for your amazing service!</p>
+      <p class="testimonial-author">Swapnil & Priya</p>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="nav-buttons">
+      <button class="nav-button" onclick="prevSlide()">&#8592; Prev</button>
+      <button class="nav-button" onclick="nextSlide()">Next &#8594;</button>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        dots[i].classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }
+
+    function prevSlide() {
+      const prev = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(prev);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            
+            font-family: 'Arial', sans-serif;
+    background: url('thali-1-edited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+        }
+
+        .portfolio-container {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .portfolio-title {
+            color: rgb(16, 16, 16);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 300;
+        }
+
+        .gallery-button {
+            display: inline-block;
+            background: #2c3e50;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+        }
+
+        .gallery-button:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* Gallery Modal */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .gallery-modal:target {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .gallery-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 90%;
+            max-height: 90%;
+            width: 1000px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow-y: auto;
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .gallery-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            font-weight: 300;
+        }
+
+        .folder-counter {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #7f8c8d;
+            font-size: 2rem;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .back-btn {
+            display: none;
+            background: #95a5a6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+
+        .back-btn.show {
+            display: inline-block;
+        }
+
+        /* Folder Grid */
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            counter-reset: folder-counter;
+        }
+
+        .folder-item {
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            counter-increment: folder-counter;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+            cursor: pointer;
+        }
+
+        .folder-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .folder-preview {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .folder-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .folder-item:hover .folder-preview img {
+            transform: scale(1.05);
+        }
+
+        .folder-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .folder-item:hover .folder-overlay {
+            opacity: 1;
+        }
+
+        .folder-play-btn {
+            color: white;
+            font-size: 3rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .folder-info {
+            padding: 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .folder-name {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .folder-count {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .folder-date {
+            color: #95a5a6;
+            font-size: 0.8rem;
+        }
+
+        /* Photo Grid (Hidden by default) */
+        .photo-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            counter-reset: photo-counter;
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            counter-increment: photo-counter;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .photo-number::before {
+            content: "#" counter(photo-counter);
+        }
+
+        /* Staggered animation delays */
+        .folder-item:nth-child(1) { animation-delay: 0.1s; }
+        .folder-item:nth-child(2) { animation-delay: 0.2s; }
+        .folder-item:nth-child(3) { animation-delay: 0.3s; }
+        .folder-item:nth-child(4) { animation-delay: 0.4s; }
+        .folder-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .photo-item:nth-child(1) { animation-delay: 0.05s; }
+        .photo-item:nth-child(2) { animation-delay: 0.1s; }
+        .photo-item:nth-child(3) { animation-delay: 0.15s; }
+        .photo-item:nth-child(4) { animation-delay: 0.2s; }
+        .photo-item:nth-child(5) { animation-delay: 0.25s; }
+        .photo-item:nth-child(6) { animation-delay: 0.3s; }
+        .photo-item:nth-child(7) { animation-delay: 0.35s; }
+        .photo-item:nth-child(8) { animation-delay: 0.4s; }
+        .photo-item:nth-child(9) { animation-delay: 0.45s; }
+        .photo-item:nth-child(10) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .portfolio-title {
+                font-size: 2rem;
+            }
+            
+            .gallery-content {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            .gallery-title {
+                font-size: 1.8rem;
+            }
+            
+            .folder-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .photo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+            
+            .photo-item img {
+                height: 120px;
+            }
+        }
+        .site-logo {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(11, 11, 11, 0.981);
+  font-family: 'Segoe UI', sans-serif;
+  z-index: 1000;
+}
+.portfolio-container {
+    position: absolute;
+    bottom: 40px;
+    right: 50px;
+    text-align: right;
+    z-index: 10;
+}
+
+.portfolio-title {
+    color: #000;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.gallery-button {
+    margin-bottom: 10px;
+}
+
+.darklight-logo {
+    color: #000;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 10px;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- <div class="site-logo">Darklight Wedding</div> -->
+
+    <!-- <div class="portfolio-container">
+        <h1 class="portfolio-title">Wedding Photography</h1>
+        <a href="#gallery" class="gallery-button">View Gallery</a>
+    </div> -->
+    <div class="portfolio-container">
+    <h1 class="portfolio-title">Wedding Photography</h1>
+    <a href="#gallery" class="gallery-button">View Gallery</a>
+    <div class="darklight-logo">Darklight Wedding</div>
+</div>
+
+
+    <div id="gallery" class="gallery-modal">
+        <div class="gallery-content">
+            <a href="#" class="close-btn">&times;</a>
+            <a href="#" class="back-btn">← Back to Folders</a>
+            
+            <div class="gallery-header">
+                <h2 class="gallery-title">Couple Galleries</h2>
+                <div class="folder-counter">5 Couples</div>
+            </div>
+
+            <!-- Folder Grid -->
+            <div class="folder-grid" id="folderGrid">
+                <div class="folder-item" data-folder="couple1">
+                    <div class="folder-preview">
+                        <img src="couple 1/DSC05560 copy.jpg" alt="Sarah & John">
+                        <div class="folder-overlay">
+                            <div class="folder-play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="folder-info">
+                        <div class="folder-name">Nikita & Harshal</div>
+                        <div class="folder-count">20 Photos</div>
+                        <div class="folder-date">June 15, 2024</div>
+                    </div>
+                </div>
+
+                <div class="folder-item" data-folder="couple2">
+                    <div class="folder-preview">
+                        <img src="couple 2/copule2_26.jpg" alt="Emma & David">
+                        <div class="folder-overlay">
+                            <div class="folder-play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="folder-info">
+                        <div class="folder-name">Anushaka & Omkar</div>
+                        <div class="folder-count">20 Photos</div>
+                        <div class="folder-date">July 22, 2024</div>
+                    </div>
+                </div>
+
+                <div class="folder-item" data-folder="couple3">
+                    <div class="folder-preview">
+                        <img src="couple 3/couple3_16.jpg" alt="Lisa & Michael">
+                        <div class="folder-overlay">
+                            <div class="folder-play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="folder-info">
+                        <div class="folder-name">Sonam & Dhiraj</div>
+                        <div class="folder-count">20 Photos</div>
+                        <div class="folder-date">August 10, 2024</div>
+                    </div>
+                </div>
+
+                <div class="folder-item" data-folder="couple4">
+                    <div class="folder-preview">
+                        <img src="couple 4/couple4_15.jpg" alt="Anna & Robert">
+                        <div class="folder-overlay">
+                            <div class="folder-play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="folder-info">
+                        <div class="folder-name">Diksha & Mukul</div>
+                        <div class="folder-count">20 Photos</div>
+                        <div class="folder-date">September 5, 2024</div>
+                    </div>
+                </div>
+
+                <div class="folder-item" data-folder="couple5">
+                    <div class="folder-preview">
+                        <img src='couple 5/couple5_11.jpg' alt="Jessica & Mark">
+                        <div class="folder-overlay">
+                            <div class="folder-play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="folder-info">
+                        <div class="folder-name">Shradha & Rohit</div>
+                        <div class="folder-count">20 Photos</div>
+                        <div class="folder-date">October 18, 2024</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Grid (Hidden by default) -->
+            <div class="photo-grid" id="photoGrid">
+                <!-- Photos will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wedding couple photo collections
+        const couplePhotos = {
+            couple1: [          
+      'couple 1/DSC03587 copy.jpg',
+      'couple 1/DSC03635 copy.jpg',
+      'couple 1/DSC03912 copy.jpg',
+      'couple 1/DSC04068 copy.jpg',
+      'couple 1/DSC04833 copy.jpg',
+      'couple 1/DSC05046 copy.jpg',
+      'couple 1/DSC05070 copy.jpg',
+      'couple 1/DSC05119 copy.jpg',
+      'couple 1/DSC05222 copy.jpg',
+      'couple 1/DSC05423 copy.jpg',
+      'couple 1/DSC05435 copy.jpg',
+      'couple 1/DSC05531 copy.jpg',
+      'couple 1/DSC05560 copy.jpg',
+      'couple 1/DSC05615 copy.jpg',
+      'couple 1/DSC05647 copy.jpg',
+      'couple 1/DSC05819 copy.jpg',
+      'couple 1/DSC05875 copy.jpg',
+      'couple 1/DSC06041 copy.jpg',
+      'couple 1/DSC06183 copy.jpg',
+      'couple 1/DSC06240 copy.jpg',
+            ],
+            couple2: [
+      'couple 2/couple2_1.jpg',
+      'couple 2/copule2_2.jpg',
+      'couple 2/copule2_3.jpg',
+      'couple 2/copule2_4.jpg',
+      'couple 2/copule2_5.jpg',
+      'couple 2/copule2_6.jpg',
+      'couple 2/copule2_7.jpg',
+      'couple 2/copule2_8.jpg',
+      'couple 2/copule2_9.jpg',
+      'couple 2/copule2_10.jpg',
+      'couple 2/copule2_11.jpg',
+      'couple 2/copule2_12.jpg',
+      'couple 2/copule2_13.jpg',
+      'couple 2/copule2_14.jpg',
+      'couple 2/copule2_15.jpg',
+      'couple 2/copule2_16.jpg',
+      'couple 2/copule2_17.jpg',
+      'couple 2/copule2_18.jpg',
+      'couple 2/copule2_19.jpg',
+      'couple 2/copule2_20.jpg',
+      'couple 2/copule2_21.jpg',
+      'couple 2/copule2_22.jpg',
+      'couple 2/copule2_23.jpg',
+      'couple 2/copule2_26.jpg',
+    ],
+            couple3: [
+  'couple 3/couple3_1.jpg',
+  'couple 3/couple3_2.jpg',
+  'couple 3/couple3_3.jpg',
+  'couple 3/couple3_4.jpg',
+  'couple 3/couple3_5.jpg',
+  'couple 3/couple3_6.jpg',
+  'couple 3/couple3_7.jpg',
+  'couple 3/couple3_8.jpg',
+  'couple 3/couple3_9.jpg',
+  'couple 3/couple3_10.jpg',
+  'couple 3/couple3_11.jpg',
+  'couple 3/couple3_12.jpg',
+  'couple 3/couple3_13.jpg',
+  'couple 3/couple3_14.jpg',
+  'couple 3/couple3_15.jpg',
+  'couple 3/couple3_16.jpg',
+  'couple 3/couple3_17.jpg',
+  'couple 3/couple3_18.jpg',
+  'couple 3/couple3_19.jpg',
+  'couple 3/couple3_20jpg',
+  'couple 3/couple3_21.jpg',
+  'couple 3/couple3_22.jpg',
+  'couple 3/couple3_23.jpg',
+  'couple 3/couple3_24.jpg',
+  'couple 3/couple3_25.jpg',
+  //'couple 3/couple3_1.jpg',
+],
+
+            couple4:  [
+  'couple 4/couple4_1.jpg',
+  'couple 4/couple4_2.jpg',
+  'couple 4/couple4_3.jpg',
+  'couple 4/couple4_4.jpg',
+  'couple 4/couple4_5.jpg',
+  'couple 4/couple4_6.jpg',
+  'couple 4/couple4_7.jpg',
+  'couple 4/couple4_8.jpg',
+  'couple 4/couple4_9.jpg',
+  'couple 4/couple4_10.jpg',
+  'couple 4/couple4_11.jpg',
+  'couple 4/couple4_12.jpg',
+  'couple 4/couple4_13.jpg',
+  'couple 4/couple4_14.jpg',
+  'couple 4/couple4_15.jpg',
+  'couple 4/couple4_16.jpg',
+  'couple 4/couple4_17.jpg',
+],
+            //<script>
+    //const couplePhotos = {
+        couple5: [
+  'couple 5/couple5_1.jpg',
+  'couple 5/couple5_2.jpg',
+  'couple 5/couple5_3.jpg',
+  'couple 5/couple5_4.jpg',
+  'couple 5/couple5_5.jpg',
+  'couple 5/couple5_6.jpg',
+  'couple 5/couple5_7.jpg',
+  'couple 5/couple5_8.jpg',
+  'couple 5/couple5_9.jpg',
+  'couple 5/couple5_10.jpg',
+  'couple 5/couple5_11.jpg',
+  'couple 5/couple5_12.jpg',
+  'couple 5/couple5_13.jpg',
+  'couple 5/couple5_14.jpg',
+  'couple 5/couple5_15.jpg',
+  'couple 5/couple5_16.jpg',
+  'couple 5/couple5_17.jpg',
+  'couple 5/couple5_18.jpg',
+  'couple 5/couple5_19.jpg',
+  'couple 5/couple5_20.jpg',
+  'couple 5/couple5_21.jpg',
+  'couple 5/couple5_22.jpg',
+  'couple 5/couple5_23.jpg',
+  'couple 5/couple5_24.jpg',
+  'couple 5/couple5_25.jpg',
+  'couple 5/couple5_26.jpg',
+  'couple 5/couple5_27.jpg',
+],
+
+    };
+
+    const folderItems = document.querySelectorAll('.folder-item');
+    const folderGrid = document.getElementById('folderGrid');
+    const photoGrid = document.getElementById('photoGrid');
+    const backBtn = document.querySelector('.back-btn');
+
+    folderItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const folderKey = item.getAttribute('data-folder');
+            const photos = couplePhotos[folderKey];
+
+            // Clear previous photos
+            photoGrid.innerHTML = '';
+
+            // Generate photo items
+            photos.forEach((url, index) => {
+                const photoItem = document.createElement('div');
+                photoItem.classList.add('photo-item');
+                photoItem.innerHTML = `
+                    <img src="${url}" alt="Photo ${index + 1}" loading="lazy">
+                    <div class="photo-number"></div>
+                `;
+                photoGrid.appendChild(photoItem);
+            });
+
+            // Switch view
+            folderGrid.style.display = 'none';
+            photoGrid.style.display = 'grid';
+            backBtn.classList.add('show');
+        });
+    });
+
+    // Back button handler
+    backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        photoGrid.style.display = 'none';
+        folderGrid.style.display = 'grid';
+        backBtn.classList.remove('show');
+    });
+</script>
+<!-- Modal -->
+<div id="lightboxModal" class="lightbox-modal" style="display:none;">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImage" />
+  <button class="prev" onclick="changePhoto(-1)">❮</button>
+  <button class="next" onclick="changePhoto(1)">❯</button>
+</div>
+
+</body>
+</html>
