@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="styles1.css" />
+  <link rel="stylesheet" href="styles1.css" />
+  <link rel="stylesheet" href="testimonials.css" />
+  <link rel="stylesheet" href="gallary.css" />
+  <link rel="stylesheet" href="navbar.css" />
+  <link rel="stylesheet" href="about.css" />
+  <style>
+    .about__image img {
+      width: 360px;
+      height: 360px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 50%;
+      box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
+      border: 5px solid #fff;
+      background-color: #fff;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about__image img:hover {
+      border: 5px solid #3b82f6;
+      /* blue tone */
+      box-shadow: 0 6px 50px rgba(59, 130, 246, 0.4);
+    }
+
+    .about__wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem 1rem;
+    }
+
+    .about__text {
+      flex: 1 1 400px;
+      max-width: 600px;
+    }
+
+    .about__image {
+      flex: 1 1 360px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .section__header_contact {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      margin-top: 100px;
+      font-weight: 500;
+      font-family: var(--header-font);
+      color: var(--text-dark);
+      text-align: center;
+    }
+  </style>
+  <title>Web Design Mastery | Capturer</title>
+</head>
+
+<body>
+  
+  <header class="header" id="home">
+    <div class="navbar_container">
+      <nav class="navbar_another">
+        <div class="logo">Darklight Weddings</div>
+
+        <div class="menu-container">
+          <div class="menu">
+            <a href="#home">Home</a>
+            <a href="#about">About us</a>
+            <a href="#service">
+              Services
+              <img src="assets/logo-white.png" alt="Camera Icon" class="icon" />
+            </a>
+            <a href="#client">Client</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div>
+    <div class="slideshow">
+      <img src="assets/header.jpg" class="active" alt="Slide 1">
+      <img src="assets/blog.jpg" alt="Slide 2">
+      <!-- <img src="assets/image-2.jpg" alt="Slide 3"> -->
+    </div>
+    
+    <!-- <div class="about-wrapper">
+      <section class="about-section">
+        <div class="about-text">
+          <h3>आमच्याविषयी</h3>
+          <h1>About <span>Us</span></h1>
+          <p>We are passionate Maharashtrian wedding photographers dedicated to capturing the sacred rituals and
+            authentic emotions of your special day. With over 8 years of experience documenting traditional ceremonies
+            from Sakhar Puda to Gruhapravesh, we understand the cultural significance of every moment.</p>
+          <p>Our approach honors the sanctity of Maharashtrian traditions while creating beautiful, artistic images that
+            preserve your heritage forever.</p>
+
+          <div class="stats">
+            <div class="stat">
+              <h2>200+</h2>
+              <p>Maharashtrian Weddings</p>
+            </div>
+            <div class="stat">
+              <h2>8+</h2>
+              <p>Years of Tradition</p>
+            </div>
+          </div>
+
+          <div class="tools">
+            <span>📷 Canon & Sony</span>
+            <span>📿 Sacred Stories</span>
+          </div>
+
+          <div class="quote-box">
+            <p>“सर्व मंगल मांगल्ये शिवे सर्वार्थ साधिके”<br>
+              - Blessing every auspicious moment of your journey</p>
+          </div>
+        </div>
+
+        <div class="about-image">
+          <img src="assets/about-photo.jpg" alt="Photographer">
+        </div>
+      </section>
+    </div> -->
+    <div class="section__container portfolio__container">
+      <h2 class="section__header">~ PORTFOLIO ~</h2>
+      <div class="portfolio__grid">
+        <div class="portfolio__card">
+          <img src="assets/portfolio-1.jpg" alt="portfolio" />
+          <div class="portfolio__content">
+            <button class="btn">VIEW PPORTFOLIO</button>
+          </div>
+        </div>
+        <div class="portfolio__card">
+          <img src="assets/portfolio-2.jpg" alt="portfolio" />
+          <div class="portfolio__content">
+            <button class="btn">VIEW PPORTFOLIO</button>
+          </div>
+        </div>
+        <div class="portfolio__card">
+          <img src="assets/portfolio-3.jpg" alt="portfolio" />
+          <div class="portfolio__content">
+            <button class="btn">VIEW PPORTFOLIO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-wrapper">
+      <section class="about-section">
+        <div class="about-text">
+          <h3>आमच्याविषयी</h3>
+          <h1>About <span>Us</span></h1>
+          <p>We are passionate Maharashtrian wedding photographers dedicated to capturing the sacred rituals and
+            authentic emotions of your special day. With over 8 years of experience documenting traditional ceremonies
+            from Sakhar Puda to Gruhapravesh, we understand the cultural significance of every moment.</p>
+          <p>Our approach honors the sanctity of Maharashtrian traditions while creating beautiful, artistic images that
+            preserve your heritage forever.</p>
+
+          <div class="stats">
+            <div class="stat">
+              <h2>200+</h2>
+              <p>Maharashtrian Weddings</p>
+            </div>
+            <div class="stat">
+              <h2>8+</h2>
+              <p>Years of Tradition</p>
+            </div>
+          </div>
+
+          <div class="tools">
+            <span>📷 Canon & Sony</span>
+            <span>📿 Sacred Stories</span>
+          </div>
+
+          <div class="quote-box">
+            <p>“सर्व मंगल मांगल्ये शिवे सर्वार्थ साधिके”<br>
+              - Blessing every auspicious moment of your journey</p>
+          </div>
+        </div>
+
+        <div class="about-image">
+          <img src="assets/about-photo.jpg" alt="Photographer">
+        </div>
+      </section>
+    </div>
+
+    <section class="service" id="service">
+      <div class="section__container service__container">
+        <h2 class="section__header">Our <span style="color: #b45309;">Services</span></h2>
+        <p class="section__description">
+          Comprehensive photography services to capture every sacred moment of your Maharashtrian wedding journey
+        </p>
+        <div class="service__grid">
+          <!-- Wedding Photography Card -->
+          <div class="service__card wedding__card">
+            <div class="service__icon"><i class="ri-heart-line"></i></div>
+            <h4>Wedding Photography</h4>
+            <h5>विवाह फोटोग्राफी</h5>
+            <p>Complete wedding day coverage capturing every sacred ritual and precious moment from Haldi to
+              Gruhapravesh.
+            </p>
+            <ul>
+              <li>Full day coverage</li>
+              <li>Traditional ceremonies</li>
+              <li>Family portraits</li>
+              <li>Candid moments</li>
+            </ul>
+          </div>
+
+          <!-- Pre-Wedding Shoot Card -->
+          <div class="service__card pre__wedding__card">
+            <div class="service__icon"><i class="ri-crown-line"></i></div>
+            <h4>Pre-Wedding Shoot</h4>
+            <h5>प्री-वेडिंग शूट</h5>
+            <p>Romantic engagement sessions showcasing your love story in beautiful locations with traditional and
+              modern
+              themes.</p>
+            <ul>
+              <li>Location scouting</li>
+              <li>Outfit consultation</li>
+              <li>Props & styling</li>
+              <li>Creative concepts</li>
+            </ul>
+          </div>
+
+          <!-- Reception Coverage Card -->
+          <div class="service__card reception__card">
+            <div class="service__icon"><i class="ri-user-smile-line"></i></div>
+            <h4>Reception Coverage</h4>
+            <h5>रिसेप्शन कवरेज</h5>
+            <p>Dedicated coverage of your reception celebrations, capturing the joy, laughter, and memorable moments.
+            </p>
+            <ul>
+              <li>Party atmosphere</li>
+              <li>Guest interactions</li>
+              <li>Live performances</li>
+              <li>Emotional moments</li>
+            </ul>
+          </div>
+        </div>
+        <section class="cta__section">
+          <div class="cta__content">
+            <div class="cta__emoji">🔥</div>
+            <h2>Ready to Begin Your Journey?</h2>
+            <p>"शुभ विवाह - जीवन का सबसे सुंदर क्षण"</p>
+            <a href="#contact" class="btn">Book Your Session</a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    
+    <iframe src="./Testimonial/testimonials.html" width="100%" height="700px" style="border:none;"></iframe>
+
+    <!-- </section> -->
+
+    <!-- <section class="section__container gallery__container">
+      <h2 class="section__header">~ GALLERY ~</h2>
+      <div class="gallery__grid">
+        <img src="assets/image-1.jpg" alt="gallery" />
+        <img src="assets/image-2.jpg" alt="gallery" />
+        <img src="assets/image-3.jpg" alt="gallery" />
+        <img src="assets/image-4.jpg" alt="gallery" />
+        <img src="assets/image-5.jpg" alt="gallery" />
+        <img src="assets/image-6.jpg" alt="gallery" />
+        <img src="assets/image-7.jpg" alt="gallery" />
+        <img src="assets/image-8.jpg" alt="gallery" />
+      </div>
+      <div class="gallery__btn">
+        <a href="javascript:void(0)" class="gallery-button" onclick="openModal()">VIEW GALLERY</a>
+
+
+
+        <!-- <a href="Gallary/galary.html" class="btn">VIEW GALLERY</button> -->
+      <!-- </div>
+      <div id="gallery" class="gallery-modal">
+        <div class="gallery-content">
+          <a href="javascript:void(0)" class="close-btn" onclick="closeModal()">&times;</a>
+
+
+          <div class="gallery-header">
+            <h2 class="gallery-title">My Work</h2>
+          </div>
+
+          <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+      </div>
+    </section> --> 
+    <section class="section__container gallery__container">
+  <h2 class="section__header">~ GALLERY ~</h2>
+
+  <div class="gallery__grid">
+    <img src="assets/image-1.jpg" alt="gallery" />
+    <img src="assets/image-2.jpg" alt="gallery" />
+    <img src="assets/image-3.jpg" alt="gallery" />
+    <img src="assets/image-4.jpg" alt="gallery" />
+    <img src="assets/image-5.jpg" alt="gallery" />
+    <img src="assets/image-6.jpg" alt="gallery" />
+    <img src="assets/image-7.jpg" alt="gallery" />
+    <img src="assets/image-8.jpg" alt="gallery" />
+  </div>
+
+  <!-- ✅ Updated Button: Opens gallery.html page -->
+  <div class="gallery__btn">
+    <a href="gallery.html" class="gallery-button">VIEW GALLERY</a>
+  </div>
+
+  <!-- ❌ Removed Modal Popup Code -->
+  <!-- You can delete or comment out this modal if not needed anymore -->
+  <!--
+  <div id="gallery" class="gallery-modal">
+    <div class="gallery-content">
+      <a href="javascript:void(0)" class="close-btn" onclick="closeModal()">&times;</a>
+
+      <div class="gallery-header">
+        <h2 class="gallery-title">My Work</h2>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </div>
+  -->
+</section>
+
+
+    <section class="blog" id="blog">
+      <div class="section__container blog__container">
+        <div class="blog__content">
+          <h2 class="section__header">~ LATEST BLOG ~</h2>
+          <h4>Capturing Emotion in Every Frame</h4>
+          <p>
+            This blog post delves into the importance of storytelling in
+            photography and how Capturer approaches capturing emotion and
+            narrative in their work. Readers will discover the techniques and
+            strategies used by professional photographers to evoke emotion,
+            convey meaning, and create compelling visual narratives that
+            resonate with viewers on a deep level.
+          </p>
+          <div class="blog__btn">
+            <button class="btn">Read More</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section Start -->
+    <!-- <section class="section__container contact__section" id="contact"> -->
+    <div id="contact">
+      <div class="section__header_contact">
+        <!-- <h2>🙏 संपर्क</h2> -->
+        <h3>Let's <span style="color: #b45309">Connect</span></h3>
+        <p>
+          Ready to preserve your sacred Maharashtrian wedding traditions? <br> We'd love to hear about your special day.
+        </p>
+        <p><em>"शुभ विवाह"</em> - <i>Auspicious Wedding Blessings</i></p>
+      </div>
+      <iframe src="./contact.html" width="100%" height="850px" style="border:none;"></iframe>
+      
+
+      <div class="contact__end-note">
+        <p><span style="font-size: 1.2rem;">🌸 "आपले स्वागत आहे"</span><br>You are always welcome to connect with us</p>
+      </div> -->
+      <!-- </section> -->
+    </div>
+    <section class="section__container instagram__container">
+      <h2 class="section__header">~ INSTAGRAM ~</h2>
+      <a href="https://www.instagram.com/darklight_weddings.in" target="_blank" rel="noopener noreferrer">
+        <div class="instagram__flex">
+          <img src="assets/image-1.jpg" alt="instagram" />
+          <img src="assets/image-2.jpg" alt="instagram" />
+          <img src="assets/image-3.jpg" alt="instagram" />
+          <img src="assets/image-4.jpg" alt="instagram" />
+          <img src="assets/image-5.jpg" alt="instagram" />
+          <img src="assets/image-6.jpg" alt="instagram" />
+          <img src="assets/image-7.jpg" alt="instagram" />
+          <img src="assets/image-8.jpg" alt="instagram" />
+        </div>
+      </a>
+    </section>
+
+    <footer id="contact">
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <img src="assets/logo-dark.png" alt="logo" />
+          <div class="footer__socials">
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+            <a href="https://www.instagram.com/darklight_weddings.in"><i class="ri-instagram-line"></i></a>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+            <a href="#"><i class="ri-youtube-fill"></i></a>
+            <a href="#"><i class="ri-pinterest-line"></i></a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <ul class="footer__links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#about">ABOUT US</a></li>
+            <li><a href="#service">SERVICES</a></li>
+            <li><a href="#client">CLIENT</a></li>
+            <li><a href="#blog">BLOG</a></li>
+            <li><a href="#contact">CONTACT US</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>STAY IN TOUCH</h4>
+          <p>
+            Keep up-to-date with all things Capturer! Join our community and
+            never miss a moment!
+          </p>
+        </div>
+      </div>
+      <div class="footer__bar">
+        Copyright © 2024 Web Design Mastery. All rights reserved.
+      </div>
+    </footer>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="Gallary/gallary.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+      const modal = document.getElementById("gallery");
+
+      function openModal() {
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden"; // optional: prevent scroll in background
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Optional: Close on ESC key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+    </script>
+    <script>
+      const slides = document.querySelectorAll('.slideshow img');
+      let current = 0;
+
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 5000); // change every 5 seconds
+    </script>
+    <!-- <script src="Testimonial/testimonials.js"></script> -->
+</body>
+
+</html>
